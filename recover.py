@@ -192,6 +192,7 @@ def find(timestamp, domain):
             pass
         else:
             print(url)
+            time.sleep(10)
             #webbrowser.open(url)
             find1c = 1
 
