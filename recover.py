@@ -192,7 +192,6 @@ def find(timestamp, domain):
             pass
         else:
             print(url)
-            time.sleep(10)
             #webbrowser.open(url)
             find1c = 1
 
@@ -258,3 +257,8 @@ for domain in domains:
 
 if find1c == 0:
     print('No File Found on Twitch Servers.')
+
+if find1c == 1:
+    time.sleep(10)
+
+
