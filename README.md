@@ -6,7 +6,7 @@
 ![GitHub](https://img.shields.io/github/license/tanersb/TwitchRecover?style=for-the-badge)
 # TwitchRecover
 
-# Need Upgrade
+## Need Upgrade
 
 Guide: 
 
