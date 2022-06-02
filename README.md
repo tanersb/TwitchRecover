@@ -6,6 +6,8 @@
 ![GitHub](https://img.shields.io/github/license/tanersb/TwitchRecover?style=for-the-badge)
 # TwitchRecover
 
+# Need Upgrade
+
 Guide: 
 
 Using a Twitch Tracker or Streams Charts link: 
