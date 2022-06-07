@@ -6,6 +6,8 @@
 ![GitHub](https://img.shields.io/github/license/tanersb/TwitchRecover?style=for-the-badge)
 # TwitchRecover
 
+![example1](https://user-images.githubusercontent.com/58490105/172502426-c53d08e3-2724-487a-9f64-5437521fea1f.png)
+
 
 Guide: 
 
@@ -18,5 +20,7 @@ i.e. https://twitchtracker.com/blastpremier/streams/46313458365
 
 
 i.e. https://streamscharts.com/channels/blastpremier/streams/46313458365
+
+
 
 
