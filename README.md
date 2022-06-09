@@ -23,6 +23,7 @@ i.e. https://streamscharts.com/channels/blastpremier/streams/46313458365
 
 ## How do i open this link
 
-Use the VLC media player. CTRL + N (open network stream) and pastle this link.
+Use the VLC media player. 
+CTRL + N (open network stream) and pastle this link.
 
 
