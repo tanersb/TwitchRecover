@@ -77,7 +77,16 @@ def linkTimeCheck(link):
 
         gelenveri = soup.find_all('time', 'ml-2 font-bold')
 
-        time = gelenveri[0].text
+
+        try:
+            time = gelenveri[0].text
+        except:
+            print('You probably got into cloudflare for bots.(could not find time data) There is nothing I can do for this error for now. \n'
+                  'Please fork if you can bypass this cloudflare. \n'
+                  'You will not get an error when you try again after a while. \n'
+                  'So try again after a while. ')
+            return
+
 
         if '\n' in time:
             time = time.replace('\n', '')
@@ -154,6 +163,17 @@ def linkTimeCheck(link):
         soup = BeautifulSoup(r.content, 'html.parser')
 
         gelenveri = soup.find_all('div', 'stream-timestamp-dt')
+
+
+        try:
+            time = gelenveri[0].text
+        except:
+            print('You probably got into cloudflare for bots.(could not find time data) There is nothing I can do for this error for now. \n'
+                  'Please fork if you can bypass this cloudflare. \n'
+                  'You will not get an error when you try again after a while. \n'
+                  'So try again after a while. ')
+            return
+
 
         print(f'Clock data:  {gelenveri[0].text}')
         print(f'Streamer name: {streamername} \nvodID: {vodID}')
@@ -268,6 +288,9 @@ print('Find the broadcast link you want from Twitchtracker or Streamscharts site
 link = str(input('Enter the link:'))
 
 timestamp = linkTimeCheck(link)
+
+if timestamp == None:
+    quit()
 
 for domain in domains:
     if find1c == 0:
