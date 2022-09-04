@@ -6,6 +6,7 @@ from threading import Thread
 from bs4 import BeautifulSoup
 import requests
 import webbrowser
+import random
 
 
 
@@ -42,6 +43,7 @@ domains = [
 find1c = 0
 
 
+
 def linkChecker(link):  # twitchtracker ve streamscharts destekli
     global streamername
     global vodID
@@ -69,7 +71,7 @@ def linkChecker(link):  # twitchtracker ve streamscharts destekli
 
 def linkTimeCheck(link):
     # global timestamp
-    if linkChecker(link) == 2 or linkChecker(link) == 4:  # sadece 2 ve 4 dönerse girsin
+    if linkChecker(link) == 2 or linkChecker(link) == 4:  # streamscharts
         print('Date and Time are checking..')
         r = requests.get(link)
 
@@ -80,11 +82,13 @@ def linkTimeCheck(link):
 
         try:
             time = gelenveri[0].text
+
         except:
             print('You probably got into cloudflare for bots.(could not find time data) There is nothing I can do for this error for now. \n'
                   'Please fork if you can bypass this cloudflare. \n'
                   'You will not get an error when you try again after a while. \n'
                   'So try again after a while. ')
+
             return
 
 
@@ -151,7 +155,7 @@ def linkTimeCheck(link):
         print(f'timestamp', timestamp)
         return timestamp
 
-    elif linkChecker(link) == 1 or linkChecker(link) == 3:
+    elif linkChecker(link) == 1 or linkChecker(link) == 3: #twitchtracker
         print('Date and Time are checking...')
         
         useragent = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
@@ -180,10 +184,8 @@ def linkTimeCheck(link):
         
         
         header = {
-            'user-agent': '{random.choice(useragent)}'
+            'user-agent': f'{random.choice(useragent)}'
         }
-        
-        
 
 
         r = requests.get(link, headers=header)
