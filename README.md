@@ -11,6 +11,8 @@
 
 Guide: 
 
+As a first step, run `pip install -r requirements.txt` to install required packages
+
 Using a Twitch Tracker or Streams Charts link: 
 
 You can use the Twitch Tracker or Streams Charts link of a stream to directly get the VOD links. 
