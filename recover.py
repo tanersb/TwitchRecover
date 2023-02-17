@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import requests
 import webbrowser
 import random
+import sys
 
 
 
@@ -314,8 +315,12 @@ def find(timestamp, domain):
             i.join()
 
 
-print('Find the broadcast link you want from Twitchtracker or Streamscharts site.')
-link = str(input('Enter the link:'))
+if len(sys.argv) < 2:
+    # just python and recover.py as 1st argument
+    print('Find the broadcast link you want from Twitchtracker or Streamscharts site.')
+    link = str(input('Enter the link:'))
+else:
+    link = sys.argv[1]
 
 timestamp = linkTimeCheck(link)
 
