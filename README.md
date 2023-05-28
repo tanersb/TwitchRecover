@@ -28,4 +28,8 @@ i.e. https://streamscharts.com/channels/blastpremier/streams/46313458365
 Use the VLC media player. 
 CTRL + N (open network stream) and pastle this link.
 
+## Suggestion
+
+As a suggestion, I would like to express my gratitude to the author of [owk880301](https://github.com/owk880301) for his excellent work on developing the by-pass method. Project prepared with Cloudflare bypass method: https://github.com/owk880301/TwitchRecover_cloudflare_bypass
+
 
