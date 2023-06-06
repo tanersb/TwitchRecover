@@ -5,44 +5,41 @@ import urllib.request
 from threading import Thread
 from bs4 import BeautifulSoup
 import requests
-import webbrowser
-import random
-import sys
 
-
+api_key = "YOUR_API_KEY"
 
 domains = [
-"https://vod-secure.twitch.tv",
-"https://vod-metro.twitch.tv",
-"https://vod-pop-secure.twitch.tv",
-"https://d2e2de1etea730.cloudfront.net",
-"https://dqrpb9wgowsf5.cloudfront.net",
-"https://ds0h3roq6wcgc.cloudfront.net",
-"https://d2nvs31859zcd8.cloudfront.net",
-"https://d2aba1wr3818hz.cloudfront.net",
-"https://d3c27h4odz752x.cloudfront.net",
-"https://dgeft87wbj63p.cloudfront.net",
-"https://d1m7jfoe9zdc1j.cloudfront.net",
-"https://d3vd9lfkzbru3h.cloudfront.net",
-"https://d2vjef5jvl6bfs.cloudfront.net",
-"https://d1ymi26ma8va5x.cloudfront.net",
-"https://d1mhjrowxxagfy.cloudfront.net",
-"https://ddacn6pr5v0tl.cloudfront.net",
-"https://d3aqoihi2n8ty8.cloudfront.net",
-"https://d1xhnb4ptk05mw.cloudfront.net",
-"https://d6tizftlrpuof.cloudfront.net",
-"https://d36nr0u3xmc4mm.cloudfront.net",
-"https://d1oca24q5dwo6d.cloudfront.net",
-"https://d2um2qdswy1tb0.cloudfront.net",
-'https://d1w2poirtb3as9.cloudfront.net',
-'https://d6d4ismr40iw.cloudfront.net',
-'https://d1g1f25tn8m2e6.cloudfront.net',
-'https://dykkng5hnh52u.cloudfront.net',
-'https://d2dylwb3shzel1.cloudfront.net',
-'https://d2xmjdvx03ij56.cloudfront.net']
+    "https://vod-secure.twitch.tv",
+    "https://vod-metro.twitch.tv",
+    "https://vod-pop-secure.twitch.tv",
+    "https://d2e2de1etea730.cloudfront.net",
+    "https://dqrpb9wgowsf5.cloudfront.net",
+    "https://ds0h3roq6wcgc.cloudfront.net",
+    "https://d2nvs31859zcd8.cloudfront.net",
+    "https://d2aba1wr3818hz.cloudfront.net",
+    "https://d3c27h4odz752x.cloudfront.net",
+    "https://dgeft87wbj63p.cloudfront.net",
+    "https://d1m7jfoe9zdc1j.cloudfront.net",
+    "https://d2vjef5jvl6bfs.cloudfront.net",
+    "https://d1ymi26ma8va5x.cloudfront.net",
+    "https://d1mhjrowxxagfy.cloudfront.net",
+    "https://ddacn6pr5v0tl.cloudfront.net",
+    "https://d3aqoihi2n8ty8.cloudfront.net",
+    "https://d1xhnb4ptk05mw.cloudfront.net",
+    "https://d6tizftlrpuof.cloudfront.net",
+    "https://d36nr0u3xmc4mm.cloudfront.net",
+    "https://d1oca24q5dwo6d.cloudfront.net",
+    "https://d2um2qdswy1tb0.cloudfront.net",
+    'https://d1w2poirtb3as9.cloudfront.net',
+    'https://d6d4ismr40iw.cloudfront.net',
+    'https://d1g1f25tn8m2e6.cloudfront.net',
+    'https://dykkng5hnh52u.cloudfront.net',
+    'https://d2dylwb3shzel1.cloudfront.net',
+    'https://d2xmjdvx03ij56.cloudfront.net',
+    'https://d1mhjrowxxagfy.cloudfront.net',
+    "https://d3vd9lfkzbru3h.cloudfront.net"]
 
 find1c = 0
-
 
 
 def linkChecker(link):  # twitchtracker ve streamscharts destekli
@@ -72,26 +69,21 @@ def linkChecker(link):  # twitchtracker ve streamscharts destekli
 
 def linkTimeCheck(link):
     # global timestamp
-    if linkChecker(link) == 2 or linkChecker(link) == 4:  # streamscharts
+    if linkChecker(link) == 2 or linkChecker(link) == 4:  # sadece 2 ve 4 dönerse girsin
         print('Date and Time are checking..')
+        encoded_link = urllib.parse.quote(link, safe='')
+        link = f"https://api.scrapingant.com/v2/general?url={encoded_link}&x-api-key={api_key}"
         r = requests.get(link)
 
         soup = BeautifulSoup(r.content, 'html.parser')
 
         gelenveri = soup.find_all('time', 'ml-2 font-bold')
 
-
         try:
             time = gelenveri[0].text
-
         except:
-            print('You probably got into cloudflare for bots.(could not find time data) There is nothing I can do for this error for now. \n'
-                  'Please fork if you can bypass this cloudflare. \n'
-                  'You will not get an error when you try again after a while. \n'
-                  'So try again after a while. ')
-
+            print('It seems you even copy and paste your api key, please paste it and try again. ')
             return
-
 
         if '\n' in time:
             time = time.replace('\n', '')
@@ -156,10 +148,18 @@ def linkTimeCheck(link):
         print(f'timestamp', timestamp)
         return timestamp
 
-    elif linkChecker(link) == 1 or linkChecker(link) == 3: #twitchtracker
+    elif linkChecker(link) == 1 or linkChecker(link) == 3:
         print('Date and Time are checking...')
-        
-        useragent = ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+
+        encoded_link = urllib.parse.quote(link, safe='')
+        link = f"https://api.scrapingant.com/v2/general?url={encoded_link}&x-api-key={api_key}"
+        header = {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.50'
+        }
+
+        '''
+        to do
+        ["Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
@@ -180,57 +180,23 @@ def linkTimeCheck(link):
         "Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_5) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.6 Safari/605.1.15",
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36 Edg/103.0.1264.77",
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36 Edg/103.0.1264.77",
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36']
-        
-        
-        header = {
-            'user-agent': f'{random.choice(useragent)}'
-        }
-
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36 Edg/103.0.1264.77"]
+        '''
 
         r = requests.get(link, headers=header)
 
         soup = BeautifulSoup(r.content, 'html.parser')
 
-        gelenveri = soup.find_all('div', 'stream-timestamp-dt')
-
-
         try:
-            time = gelenveri[0].text
-        except:
-            print('You probably got into cloudflare for bots.(could not find time data) There is nothing I can do for this error for now. \n'
-                  'Please fork if you can bypass this cloudflare. \n'
-                  'You will not get an error when you try again after a while. \n'
-                  'So try again after a while. ')
-            return
-
-
-        print(f'Clock data:  {gelenveri[0].text}')
-        print(f'Streamer name: {streamername} \nvodID: {vodID}')
-
-        firstandsecond_time = gelenveri[0].text.split(' ')
-
-        first_time = firstandsecond_time[0].split('-')
-        second_time = firstandsecond_time[1].split(':')
-
-        day = int(first_time[2])
-
-        month = int(first_time[1])
-
-        year = int(first_time[0])
-
-        hour = int(second_time[0])
-
-        minute = int(second_time[1])
-
-        second = int(second_time[2])
-
-        timestamp = str(year) + '-' + str(month) + '-' + str(day) + '-' + str(hour) + '-' + str(minute) + '-' + str(
-            second)
-
+            meta_element = soup.find("meta", attrs={"name": "description"})
+            content = meta_element.get("content")
+        except AttributeError:
+            print("It seems you even copy and paste your api key, please paste it and try again.")
+        content = meta_element.get("content")
+        first_time = content.split(" - ")[0].split("on ")[1]
+        
+        timestamp = first_time.replace(" ", "-").replace(":", "-")
         print(f'timestamp', timestamp)
-
         return timestamp
 
     elif linkChecker(link) == 0:
@@ -263,7 +229,7 @@ def find(timestamp, domain):
             pass
         else:
             print(url)
-            #webbrowser.open(url)
+            # webbrowser.open(url)
             find1c = 1
 
     threads = []
@@ -276,9 +242,11 @@ def find(timestamp, domain):
 
             converted_timestamp = totimestamp(td)
 
-            formattedstring = streamername + "_" + vodID + "_" + str(int(converted_timestamp))
+            formattedstring = streamername + "_" + \
+                vodID + "_" + str(int(converted_timestamp))
 
-            hash = str(hashlib.sha1(formattedstring.encode('utf-8')).hexdigest())
+            hash = str(hashlib.sha1(
+                formattedstring.encode('utf-8')).hexdigest())
 
             requiredhash = hash[:20]
 
@@ -297,7 +265,8 @@ def find(timestamp, domain):
 
         converted_timestamp = totimestamp(td)
 
-        formattedstring = streamername + "_" + vodID + "_" + str(int(converted_timestamp))
+        formattedstring = streamername + "_" + \
+            vodID + "_" + str(int(converted_timestamp))
 
         hash = str(hashlib.sha1(formattedstring.encode('utf-8')).hexdigest())
 
@@ -315,12 +284,9 @@ def find(timestamp, domain):
             i.join()
 
 
-if len(sys.argv) < 2:
-    # just python and recover.py as 1st argument
-    print('Find the broadcast link you want from Twitchtracker or Streamscharts site.')
-    link = str(input('Enter the link:'))
-else:
-    link = sys.argv[1]
+print('Find the broadcast link you want from Twitchtracker or Streamscharts site.')
+link = str(input('Enter the link:'))
+
 
 timestamp = linkTimeCheck(link)
 
@@ -338,5 +304,3 @@ if find1c == 0:
 
 if find1c == 1:
     time.sleep(10)
-
-
